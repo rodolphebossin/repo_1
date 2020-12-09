@@ -13,7 +13,7 @@ public class FileManager {
 	private StringBuilder sb;
 
 	public FileManager() {
-		currentPath = "\\test\\";
+		currentPath = "/Users/rodolphebossin/Documents/Humanbooster/Cours/";
 		this.sb = new StringBuilder();
 	}
 
@@ -75,27 +75,25 @@ public class FileManager {
 			}
 		}
 
-		currentPath += folders.get(index).getName() + "\\";
+		currentPath += folders.get(index).getName() + "/";
 	}
 
 	/**
 	 * Go back one folder from the current path
 	 */
 	public void backOneFolder() {
+        List<String> paths = Arrays.asList(currentPath.split(Pattern.quote("/")));
 
+        if(paths.size() > 0) {
+            paths = paths.subList(0, paths.size() - 1);
 
-		List<String> paths = Arrays.asList(currentPath.split(Pattern.quote("\\")));
+            currentPath = String.join("\\", paths);
+        }
 
-		paths.remove(paths.size() - 1);
-
-		//paths = paths.subList(0, paths.size() - 1);
-
-		currentPath = String.join("\\", paths);
-
-		if (currentPath.isEmpty()) {
-			currentPath = "\\";
-		}
-	}
+        if (currentPath.isEmpty()) {
+            currentPath = "\\";
+        }
+    }
 
 	public void createFolder(String name) {
 		File file = new File(currentPath + name);
